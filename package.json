@@ -23,7 +23,10 @@
     "download-git-repo": "^2.0.0",
     "handlebars": "^4.1.2",
     "inquirer": "^6.5.0",
-    "ora": "^3.4.0"
+    "metalsmith": "^2.3.0",
+    "ora": "^3.4.0",
+    "rimraf": "^2.6.3",
+    "user-home": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0"

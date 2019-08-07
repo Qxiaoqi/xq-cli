@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+
+const download = require('download-git-repo')
+const program = require('commander')
+const chalk = require('chalk')
+const home = require('user-home')
+const rm = require('rimraf').sync
+const ora = require('ora')
+
+const exists = require('fs').existsSync
+const path = require('path')
+
+const generate = require('../lib/generate')
+
+program
+  .usage('<template-name> <project-name>')
+
+
+// 帮助信息
+program.on('--help', () => {
+  console.log('  Examples:')
+  console.log()
+  console.log(chalk.blue('    # create a new project with a template'))
+  console.log(chalk.yellow('    $ xq init <template-name> <project-name>'))
+  console.log()
+})
+  
+
+// 打印帮助
+function help () {
+  program.parse(process.argv)
+  if (program.args.length < 2) return program.help()
+}
+help()
+
+// 路径参数相关配置
+
+// 模板名称
+let template = program.args[0] + '-template'
+// 项目名
+const name = program.args[1]
+// 目标路径
+const to = path.resolve(name)
+// 本地下载位置
+const tmp = path.join(home, '.xq-templates', template)
+
+console.log("template:", template)
+console.log("name:", name)
+console.log("to:", to)
+console.log("tmp:", tmp)
+
+
+
+// 结束
+console.log()
+process.on('exit', () => {
+  console.log()
+})
+
+
+run()
+
+function run() {
+  const targetTemplate = 'Qxiaoqi/' + template
+  downloadAndGenerate(targetTemplate)
+}
+
+function downloadAndGenerate(template) {
+  // console.log('targetTemplate:', template)
+  const spinner = ora('downloading template ')
+  spinner.start()
+  // 如果本地暂存位置已经有了，则删去重下
+  if (exists(tmp)) {
+    rm(tmp)
+  }
+  download(template, tmp, err => {
+    spinner.stop()
+    if (err) console.log('Failed to download repo ' + template + ': ' + err.message.trim())
+    generate(name, tmp, to, err => {
+      if (err) console.log(err)
+      console.log()
+      console.log('Generated "%s".', name)
+    })
+  })
+}

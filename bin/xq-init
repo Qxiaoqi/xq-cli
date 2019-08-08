@@ -11,6 +11,7 @@ const exists = require('fs').existsSync
 const path = require('path')
 
 const generate = require('../lib/generate')
+const logger = require('../lib/logger')
 
 program
   .usage('<template-name> <project-name>')
@@ -34,7 +35,6 @@ function help () {
 help()
 
 // 路径参数相关配置
-
 // 模板名称
 let template = program.args[0] + '-template'
 // 项目名
@@ -43,13 +43,14 @@ const name = program.args[1]
 const to = path.resolve(name)
 // 本地下载位置
 const tmp = path.join(home, '.xq-templates', template)
-
-console.log("template:", template)
-console.log("name:", name)
-console.log("to:", to)
-console.log("tmp:", tmp)
+// 本地测试
+const myTmp = path.resolve('../cli-template/webpack')
 
 
+// console.log("template:", template)
+// console.log("name:", name)
+// console.log("to:", to)
+// console.log("tmp:", tmp)
 
 // 结束
 console.log()
@@ -75,11 +76,11 @@ function downloadAndGenerate(template) {
   }
   download(template, tmp, err => {
     spinner.stop()
-    if (err) console.log('Failed to download repo ' + template + ': ' + err.message.trim())
-    generate(name, tmp, to, err => {
-      if (err) console.log(err)
+    if (err) logger.fatal('Failed to download repo ' + template + ': ' + err.message.trim())
+    generate(name, myTmp, to, err => {
+      if (err) logger.fatal(err)
       console.log()
-      console.log('Generated "%s".', name)
+      logger.success(`Generated "${name}".`)
     })
   })
 }

@@ -1,0 +1,32 @@
+{
+  "name": "webpack-simple",
+  "version": "1.0.0",
+  "description": "A Simple Webpack Template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.prod.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
+    "glob": "^7.1.4",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}

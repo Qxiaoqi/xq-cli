@@ -1,0 +1,4 @@
+header
+  ul.nav
+    each page in ["index", "about"]
+      li.list-item #[a(href="./" + page + ".html")= page]

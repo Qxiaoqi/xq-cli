@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const chalk = require('chalk')
+
+
+console.log()
+console.log('  all templates:')
+console.log()
+
+console.log(
+  '  ' + chalk.yellow('★') + 
+  '  ' + chalk.blue('simple') + 
+  ' - ' + 'a very very simple template' +
+  '\n' +
+  '  ' + chalk.yellow('★') + 
+  '  ' + chalk.blue('webpack') + 
+  ' - ' + 'webpack multiple pages template' +
+  '\n'
+)
+

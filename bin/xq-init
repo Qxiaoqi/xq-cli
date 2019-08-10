@@ -44,7 +44,7 @@ const to = path.resolve(name)
 // 本地下载位置
 const tmp = path.join(home, '.xq-templates', template)
 // 本地测试
-const myTmp = path.resolve('../cli-template/webpack')
+// const myTmp = path.resolve('../cli-template/webpack-template')
 
 
 // console.log("template:", template)
@@ -67,7 +67,6 @@ function run() {
 }
 
 function downloadAndGenerate(template) {
-  // console.log('targetTemplate:', template)
   const spinner = ora('downloading template ')
   spinner.start()
   // 如果本地暂存位置已经有了，则删去重下
